@@ -4,13 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run test:backend && npm run lint-fix:backend",
+    "test:backend": "cd backend && npm test",
+    "lint-fix:backend": "cd backend && npm run lint:fix",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "git-commit-msg-linter": "^5.0.8"
+    "git-commit-msg-linter": "^5.0.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3"
+  },
+  "lint-staged": {
+    "backend/**/*.ts": [
+      "npm run test:backend -- findRelatedTests",
+      "npm run lint-fix:backend"
+    ]
   }
 }
